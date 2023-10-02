@@ -1,4 +1,4 @@
-# Pagina de mangas como red social 
+# Pagina de mangas como red social
 
 Aplicación creada con MongoDB, Express.js, Angular y Node.js.
 
