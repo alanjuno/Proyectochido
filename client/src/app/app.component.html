@@ -1,0 +1,76 @@
+ <nav class="navbar navbar-expand-md navbar-light bg-primary">
+   <a class="navbar-brand text-white" href="#"><i class="fab fa-renren"></i> {{title}}</a>
+   <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+     aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+   </button>
+   <div class="collapse navbar-collapse" id="collapsibleNavId">
+     <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="identity">
+       <li class="nav-item">
+         <a class="nav-link" [routerLink]="['/home']" [routerLinkActive]="['active']">
+           <i class="fas fa-home"></i> INICIO
+         </a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" [routerLink]="['/timeline']" [routerLinkActive]="['active']">
+           <i class="fas fa-th-list"></i> TIMELINE
+         </a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" [routerLink]="['/usuarios', 1]" [routerLinkActive]="['active']">
+           <i class="fas fa-user"></i> USUARIOS
+         </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/mensajes']" [routerLinkActive]="['active']" id="messages">
+          <i class="fa fa-envelope"></i> MENSAJES
+        </a>
+      </li>
+     </ul>
+
+     <!-- Si el usuario no esta identificado -->
+     <ul class="nav navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="!identity">
+       <li class="nav-item">
+         <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']">
+           <span class="fas fa-sign-in-alt"></span> LOGIN
+         </a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" [routerLink]="['/registro']" [routerLinkActive]="['active']">
+           <span class="fas fa-user-circle"></span> REGISTRO
+         </a>
+       </li>
+     </ul>
+
+     <!-- Si el usuario esta identificado  -->
+     <ul class="nav navbar-nav mt-2" *ngIf="identity">
+       <li class="nav-item">
+         <!-- Cargar avatar de usuario -->
+         <img src="{{url  + 'get-image-user/' + identity.image}}" *ngIf="identity && identity.image" alt=""
+           class="rounded-circle image-fluid avatar">
+         <img src="assets/user-default.png" *ngIf="identity && !identity.image" alt=""
+           class="rounded-circle image-fluid avatar">
+       </li>
+       <li class="nav-item dropdown" id="identity">
+         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+           Hola, {{identity.name}}
+         </a>
+         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+           <a class="dropdown-item" [routerLink]="['/perfil', identity._id]">
+             <i class="fas fa-user"></i> Perfil
+           </a>
+           <a class="dropdown-item" [routerLink]="['/mis-datos']">
+             <i class="fas fa-user-cog"></i> Actualizar
+           </a>
+           <div class="dropdown-divider"></div>
+           <a class="dropdown-item" (click)="logout()">
+             <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+           </a>
+         </div>
+       </li>
+     </ul>
+   </div>
+ </nav>
+
+ <router-outlet></router-outlet>

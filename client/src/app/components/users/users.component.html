@@ -1,0 +1,66 @@
+<div class=" d-flex container-users col-lg-12">
+
+  <div class="col-lg-8">
+    <h3 class="text-primary mt-5 mb-4">{{title}}</h3>
+
+    <div>
+      <!-- Listado de usuarios -->
+      <div *ngFor="let user of users" class="user-item">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <div class="float-left mr-3">
+              <a href="#">
+                <img src="{{url + 'get-image-user/' + user.image}}" alt="" class="img-fluid rounded user-image"
+                  *ngIf="user.image">
+
+                <img src="assets/user-default.png" alt="" class="img-fluid rounded user-image" *ngIf="!user.image">
+              </a>
+            </div>
+
+            <div class="user-name float-left">
+              <p>
+                <a [routerLink]="['/perfil', user._id]" class="text-dark text-decoration-none font-weight-bold">
+                  {{user.name + ' ' + user.surname}}
+                </a>
+              </p>
+              <p class="text-muted nickname">Nickname: {{user.nickname}}</p>
+            </div>
+
+            <!-- Seguir o dejar de seguir a un usuario -->
+            <div class="float-right container-btn" *ngIf="user._id !== identity._id">
+              <button class="btn btn-primary m-btn mt-4 p-1" *ngIf="follows.indexOf(user._id) < 0"
+                (click)="followUser(user._id)">
+                <i class="fas fa-user-plus"></i> Seguir
+              </button>
+
+              <button class="btn btn-success m-btn mt-4 p-1" *ngIf="follows.indexOf(user._id) >= 0"
+                (mouseenter)="mouseEnter(user._id)" (mouseleave)="mouseLeave(user._id)" (click)="unfollowUser(user._id)"
+                [class.btn-danger]="user._id === followUserOver">
+                <span *ngIf="user._id === followUserOver; else following">
+                  <i class="fas fa-user-minus"></i> Dejar de seguir
+                </span>
+                <ng-template #following>
+                  <i class="fas fa-check"></i> Siguiendo
+                </ng-template>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paginación -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination float-right">
+          <li class="page-item mr-2" *ngIf="page > 1">
+            <a class="page-link" [routerLink]="['/usuarios', previusPage]">Anterior</a>
+          </li>
+          <li class="page-item" *ngIf="pages !== page">
+            <a class="page-link" [routerLink]="['/usuarios', nextPage]">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <app-sidebar class="col-lg-4"></app-sidebar>
+</div>

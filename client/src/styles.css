@@ -1,0 +1,188 @@
+/* Estilo general */
+* {
+  /* border: 1px solid gray; */
+  font-family: 'Original Surfer', cursive;
+}
+
+.active {
+  border-radius: 0.2rem;
+  background-color: #004ea2;
+}
+
+/* Botones para seguir o dejar de seguir un usuario */
+.container-btn {
+  width: 50%;
+}
+
+.m-btn {
+  float: right;
+}
+
+/* Header */
+.nav-link {
+  padding: 0.5rem !important;
+  color: white !important;
+}
+
+.navbar-toggler-icon {
+  color: white !important;
+}
+
+#identity  {
+  margin-right: 2rem !important;
+}
+
+.dropdown-menu * {
+  color: black !important;
+}
+
+.dropdown-menu a:hover {
+  background-color:  #f2f2f2 !important;
+}
+
+/* Formulario de registro */
+#registro {
+  margin-top: 5rem;
+}
+
+/* Formulario de login */
+#login {
+  padding: 1rem;
+  margin-top: 5rem;
+}
+
+#register-link {
+  margin-top: -5.3rem;
+}
+
+/* Listado de usuarios - Sidebar */
+.user-card {
+  width: 100% !important;
+  padding: 0.8rem !important;
+}
+
+#new-publication {
+  padding: 0.6rem;
+}
+
+.label-stats {
+  display: block;
+  text-align: center;
+  border-radius: 0.2rem;
+}
+
+/* Timeline */
+#publications {
+  min-height: 31rem;
+}
+
+/* Imágenes de usuario - Avatar */
+
+/* Imagen el formulario de actualizar usuario */
+.user-avatar {
+  width: 8rem;
+  height: 8rem;
+}
+
+/* Imagen en la barra de navegación usuario identificado */
+.avatar {
+  width: 2.5rem;
+  height: auto;
+  overflow: hidden;
+  margin-right: 0.2rem;
+  background-color: white;
+}
+
+/* Imágenes listado de usuarios */
+.user-image {
+  width: 4.5rem;
+  height: auto;
+  margin-right: 0.2rem;
+  background-color: #f2f2f2;
+}
+
+/* Timeline - Publicaciones */
+.publication-image img {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 0.3rem !important;
+}
+
+/* Perfil de usuario */
+.name {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.nickname {
+  font-size: 1rem;
+}
+
+.user-image-profile {
+  width: 8rem;
+  height: 8rem;
+}
+
+.btn-profile  {
+  font-size: 0.9rem !important;
+  padding: 0.2rem !important;
+}
+
+.stats-profile a {
+  font-size: 0.9rem;
+  padding: 0.2rem;
+}
+
+/* CSS media query within a style sheet */
+@media (max-width: 414px) {
+  .icon {
+    font-size: 6rem !important;
+  }
+
+ .container-users {
+   flex-direction: column;
+ }
+ 
+ .container-publications {
+  flex-direction: column;
+ }
+
+ #data-profile {
+  flex-direction: column;
+ }
+
+ .container-messages {
+  flex-direction: column;
+}
+
+}
+
+@media (max-width: 640px) {
+  * {
+    font-size: 0.9rem !important;
+  }
+
+  .container-publications {
+    flex-direction: column;
+   }
+
+  .container-messages {
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 823px) {
+  * {
+    font-size: 0.9rem !important;
+  }
+
+  .container-btn {
+    width: 100%;
+  }
+
+  .m-btn {
+    width: 100%;
+  }
+}
+  

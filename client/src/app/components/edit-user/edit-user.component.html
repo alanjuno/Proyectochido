@@ -1,0 +1,70 @@
+<div id="edit-user">
+  <div class="container">
+    <div id="edit-user-row" class="row justify-content-center align-items-center">
+      <div id="edit-user-column" class="col-md-8">
+        <div id="edit-user-box" class="col-md-12">
+          <div class="mt-5">
+            <h2 class="text-center text-primary pt-2 pb-2">{{title}}</h2>
+            <hr />
+          </div>
+
+          <div class="alert alert-success text-center" *ngIf="status === 'success'">
+            DATOS DE USUARIO ACTUALIZADOS CORRECTAMENTE
+          </div>
+
+          <div class="alert alert-danger text-center" *ngIf="status === 'error'">
+            <p>NO SE HAN PODIDO ACTUALIZAR LOS DATOS</p>
+            <p>EMAIL Y/O NICKNAME NO DISPONIBLES</p>
+          </div>
+
+          <form id="edit-user-form" #editUserForm="ngForm" (ngSubmit)="onSubmit()">
+            <p>
+              <label for="name" class="text-primary">Nombre</label>
+              <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required />
+              <span *ngIf="!name.value && name.touched" class="text-danger">
+                El nombre es obligatorio
+              </span>
+            </p>
+            <p>
+              <label for="surname" class="text-primary">Apellidos</label>
+              <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control"
+                required />
+              <span *ngIf="!surname.value && surname.touched" class="text-danger">
+                Los apellidos son obligatorios
+              </span>
+            </p>
+            <p>
+              <label for="nickname" class="text-primary">Nickname</label>
+              <input type="text" name="nickname" #nickname="ngModel" [(ngModel)]="user.nickname" class="form-control"
+                required />
+              <span *ngIf="!nickname.value && nickname.touched" class="text-danger">
+                El nickname es obligatorio
+              </span>
+            </p>
+            <p>
+              <label for="email" class="text-primary">Correo electrónico</label>
+              <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+              <span *ngIf="!email.value && email.touched" class="text-danger">
+                El email no es válido
+              </span>
+            </p>
+
+            <div *ngIf='user.image'>
+              <label class="text-primary">Avatar de usuario</label><br>
+              <img src="{{url + 'get-image-user/' + user.image}}" class="img-fluid user-avatar" alt="image">
+            </div>
+
+            <p>
+              <label class="text-primary">Selecciona una imagen</label><br>
+              <input type="file" placeholder="Subir imagen" (change)="fileChangeEvent($event)" />
+            </p>
+
+            <input type="submit" value="Actualizar" class="btn btn-primary btn-block mb-5"
+              [disabled]="!editUserForm.form.valid">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

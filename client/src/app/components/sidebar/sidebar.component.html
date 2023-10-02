@@ -1,0 +1,86 @@
+<h3 class="text-primary mt-5">Hola, {{identity.name}}</h3>
+
+<div class="col-lg-12 card card-body user-card mt-4">
+  <div>
+    <div class="user-avatar-info float-left">
+      <img src="{{url + 'get-image-user/' + identity.image}}" alt="user-image" class="user-avatar"
+        *ngIf="identity.image">
+
+      <img src="assets/user-default.png" alt="user-umage" *ngIf="!identity.image">
+    </div>
+
+    <div class="name-surname mt-3">
+      <a [routerLink]="['/perfil', identity._id]" class="text-dark text-decoration-none font-weight-bold">
+        {{identity.name + ' ' + identity.surname}}
+      </a>
+      <p class="text-muted">Nickname: {{identity.nickname}}</p>
+    </div>
+  </div>
+  <hr>
+  <!-- Estadísticas de usuario -->
+  <div class="stats stats-profile d-flex justify-content-between" *ngIf="stats">
+    <a type="button" [routerLink]="['/siguiendo', identity._id, 1]" class="btn btn-primary text-white p-1">
+      Siguiendo <span class="badge badge-light">{{stats.following}}</span>
+    </a>
+
+    <a type="button" [routerLink]="['/seguidores', identity._id, 1]" class="btn btn-primary text-white p-1">
+      Seguidores <span class="badge badge-light">{{stats.followed}}</span>
+    </a>
+
+    <a type="button" [routerLink]="['/perfil', identity._id]" class="btn btn-primary text-white p-1">
+      Publicaciones <span class="badge badge-light">{{stats.publications}}</span>
+    </a>
+  </div>
+</div>
+
+<!-- Formulario de publicaciones -->
+<h3 class="text-primary mt-4">Crear publicación</h3>
+<div id="new-publication" class="col-lg-12 card card-body mt-4">
+
+
+
+
+  <div>
+    <input type="file" (change)="addImage($event)" accept="image/*" multiple>
+    <button (click)="combineImages()">Combinar Imágenes</button>
+    <button (click)="downloadCombinedImage()">Descargar Imagen Combinada</button>
+  </div>
+  
+  <div *ngIf="combinedImage">
+    <img [src]="combinedImage" alt="Imagen Combinada">
+  </div>
+
+
+
+
+
+
+
+
+
+  <div class="alert alert-success text-center" *ngIf="status === 'success'">
+    Publicación creada correctamente
+  </div>
+
+  <div class="alert alert-danger text-center" *ngIf="status === 'error'">
+    <p>No se he creado la publicación</p>
+  </div>
+
+  <form #newPublicationForm="ngForm" (ngSubmit)="onSubmit(newPublicationForm, $event); "
+    class="col-lg-12">
+    <p>
+      <label for="text">Texto de la publicación</label>
+      <textarea name="text" #text="ngModel" [(ngModel)]="publication.text" class="form-control" required></textarea>
+      <span *ngIf="!text.valid && text.touched" class="text-danger">
+        El texto de la publicación es obligatorio
+      </span>
+    </p>
+
+    <p>
+      <label for="image">Sube una imagen</label><br>
+      <input type="file" name="image" (change)="fileChangeEvent($event)">
+    </p>
+
+    <input type="submit" value="ENVIAR" class="btn btn-primary btn-block" [disabled]="!newPublicationForm.form.valid">
+  </form>
+</div>

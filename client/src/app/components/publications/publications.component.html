@@ -1,0 +1,79 @@
+
+  <div id="publications" class="mt-4">
+    <div *ngFor="let publication of publications" class="item-publication mb-2">
+      <div class="card card-body">
+        <div class="mr-3">
+          <a href="#">
+            <img src="{{url + 'get-image-user/' + publication.user.image}}" alt="" class="img-fluid rounded user-image"
+              *ngIf="publication.user.image">
+
+            <img src="assets/user-default.png" alt="" class="img-fluid rounded user-image"
+              *ngIf="!publication.user.image">
+          </a>
+        </div>
+        <div class="mt-2">
+          {{publication.user.name + ' ' + publication.user.surname}}
+        </div>
+        <div class="date text-muted">
+          {{(publication.created_at | amFromUnix) | amLocale: 'es' | amTimeAgo}}
+        </div>
+        <hr>
+        <h5 class="publication-text text-justify">{{publication.text}}</h5>
+        
+        <div>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#exampleModal"
+          *ngIf="publication && publication.user._id === identity._id">
+          <i class="fas fa-trash"></i> Eliminar
+        </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar publicación</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>¿Estás seguro de que quieres eliminar la publicación?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-danger" (click)="deletePublication(publication._id)">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Final modal -->
+
+          <!-- Mostrar publicaciones -->
+          <div *ngIf="publication.file">
+            <button class="btn btn-primary text-white float-right mr-1" (click)="showImagePublication(publication._id)"
+              *ngIf="showImage !== publication._id">
+              <i class="fas fa-image"></i> Mostrar
+            </button>
+            <button class="btn btn-danger text-white float-right mr-1" (click)="hideImagePublication(publication._id)"
+              *ngIf="showImage === publication._id">
+              <i class="fas fa-image"></i> Ocultar
+            </button>
+          </div>
+          <!-- Final publicaciones -->
+        </div>
+
+
+        <div class="publication-image mt-2" *ngIf="publication.file && showImage === publication._id">
+          <img src="{{url + 'get-image-publication/' + publication.file}}" class="img-fluid mt-1" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12 text-center" *ngIf="publications && publications.length">
+    <button class="btn btn-info mt-3 mb-3" (click)="viewMore()" *ngIf="!noMore">
+      Ver más publicaciones
+    </button>
+  </div>
+

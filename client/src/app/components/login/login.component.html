@@ -1,0 +1,56 @@
+<div id="login">
+  <div class="container col-lg-10 m-auto">
+    <div id="login-row" class="row justify-content-center align-items-center">
+      <div id="login-column" class="col-md-8 col-lg-6 col-sm-12">
+        <div id="login-box" class="col-md-12">
+
+          <div class="alert alert-success text-center" *ngIf="status === 'success'">
+            USUARIO IDENTIFICADO CORRECTAMENTE
+          </div>
+
+          <div class="alert alert-danger text-center" *ngIf="status === 'error'">
+            <p>NO TE HAS PODIDO IDENTIFICAR</p>
+            <p>EMAIL Y/O PASSWORD INCORRECTOS</p>
+          </div>
+
+          <form id="login-form" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+            <div>
+              <h2 class="text-center text-primary">{{title}}</h2>
+              <hr />
+            </div>
+
+
+            <div class="form-group mt-4">
+              <label for="email" class="text-primary">Correo electrónico</label><br>
+              <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+              <span *ngIf="!email.valid && email.touched" class="text-danger">
+                El email es obligatorio o no es válido
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="text-primary">Contraseña</label><br>
+              <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
+                class="form-control" required />
+              <span *ngIf="!password.valid && password.touched" class="text-danger">
+                La contraseña es obligatoria
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="remember-me" class="text-primary"><span>Recordar</span> 
+                <span><input id="remember-me" name="remember-me" type="checkbox"></span>
+              </label><br>
+            </div>
+            <input type="submit" value="Iniciar sesión" name="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.form.valid">
+
+            <div id="register-link" class="text-right">
+              <a class="text-primary" [routerLink]="['/registro']">Registrate</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
