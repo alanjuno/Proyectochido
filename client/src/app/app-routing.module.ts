@@ -13,12 +13,14 @@ import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
 
 import { UserGuard } from './services/user.guard';
+import { WikiComponent } from './wiki/wiki.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
+  { path: 'wiki', component: WikiComponent },
   { path: 'mis-datos', component: EditUserComponent, canActivate: [UserGuard] },
   { path: 'usuarios', component: UsersComponent, canActivate: [UserGuard] },
   { path: 'usuarios/:page', component: UsersComponent, canActivate: [UserGuard] },

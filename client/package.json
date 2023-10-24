@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl true --ssl-key C:\\Users\\Christian\\ProyectoMARIO\\chido\\certificados\\server.key --ssl-cert C:\\Users\\Christian\\ProyectoMARIO\\chido\\certificados\\server.crt",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,6 +22,7 @@
     "angular2-moment": "^1.9.0",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
+    "ngx-paypal": "^6.2.0",
     "notiflix": "^3.2.6",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

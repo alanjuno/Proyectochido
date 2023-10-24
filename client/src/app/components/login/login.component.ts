@@ -3,6 +3,11 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from './../../models/user';
 import { UserService } from './../../services/user.service';
 
+import { Observable,  } from 'rxjs';
+
+
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,10 +22,13 @@ export class LoginComponent implements OnInit {
   public identity; // Objeto del usuario identificado
   public token; // Token del usuario identificado
 
+ 
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService
+    private _userService: UserService,
+    
   ) {
     this.title = 'IDENTIFICATE';
     this.user = new User('', '', '', '', '', '', 'ROLE_USER', '');
@@ -91,5 +99,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  
 
 }
