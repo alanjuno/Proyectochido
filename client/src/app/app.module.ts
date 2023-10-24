@@ -23,10 +23,18 @@ import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
 
 
+//PaypalModule
+import { NgxPayPalModule } from 'ngx-paypal';
+
+
+
+
+
 
 // Servicios
 import { UserService } from './services/user.service';
 import { UserGuard } from './services/user.guard';
+import { WikiComponent } from './wiki/wiki.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +50,7 @@ import { UserGuard } from './services/user.guard';
     PublicationsComponent,
     FollowingComponent,
     FollowedComponent,
+    WikiComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +59,9 @@ import { UserGuard } from './services/user.guard';
     HttpClientModule,
     MomentModule,
     MessagesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
+    
   ],
   providers: [UserService, UserGuard],
   bootstrap: [AppComponent]
