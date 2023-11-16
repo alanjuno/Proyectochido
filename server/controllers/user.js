@@ -20,6 +20,11 @@ const Publication = require('./../models/publication');
 // Cargar servicio para el token de autenticación
 const jwt = require('./../services/jwt');
 
+//Llamamos la peticion para enviar correos
+const nodemailer = require('nodemailer');
+
+
+
 // Registrar usuario
 function saveUser(request, response) {
     let params = request.body;
@@ -115,6 +120,9 @@ function saveUser(request, response) {
                         if (error) return response.status(500).send({ message: 'No se ha podido procesar la petición para guardar un usuario' });
 
                         if (userStored) {
+                            // Envía el correo de confirmación
+                            sendConfirmationEmail(userStored.email);
+            
                             response.status(200).send({ user: userStored });
                         } else {
                             response.status(400).send({ message: 'No se ha podido registrar el usuario' });
@@ -122,6 +130,40 @@ function saveUser(request, response) {
                     });
                 });
             }
+
+
+
+            // Función para enviar correo de confirmación
+function sendConfirmationEmail(email) {
+    // Configura el transporter de nodemailer
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'alanavelar9@gmail.com', // Cambiar con tu dirección de correo
+            pass: 'tswfgkmrtetlvfxy' // Cambiar con tu contraseña
+        }
+    });
+
+    // Configura el correo electrónico
+    const mailOptions = {
+        from: 'alanavelar9@gmail.com', // Cambiar con tu dirección de correo
+        to: email,
+        subject: 'Confirmación de cuenta',
+        text: 'Gracias por registrarte en nuestra aplicación. Por favor, haz clic en el siguiente enlace para confirmar tu cuenta: http://tudominio.com/confirmar/' + email
+    };
+
+    // Envía el correo electrónico
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Correo de confirmación enviado: ' + info.response);
+        }
+    });
+}
+
+
+
         });
 
     } else {
@@ -130,6 +172,36 @@ function saveUser(request, response) {
         });
     }
 };
+
+
+
+// manejar la confirmación de correo electronico
+function confirmAccount(request, response) {
+    const email = request.params.email;
+
+    // Aquí deberías verificar el token o enlace y actualizar el estado del usuario
+    // Puedes utilizar un middleware de autenticación para verificar el token
+
+    // Ejemplo: actualizar el estado del usuario a confirmado
+    User.findOneAndUpdate({ email: email }, { $set: { confirmed: true } }, { new: true }, (error, user) => {
+        if (error) {
+            return response.status(500).send({ message: 'Error al confirmar la cuenta' });
+        }
+
+        if (!user) {
+            return response.status(404).send({ message: 'Usuario no encontrado' });
+        }
+
+        return response.status(200).send({ message: 'Cuenta confirmada exitosamente' });
+    });
+}
+
+
+
+
+
+
+
 
 // Login usuario
 function loginUser(request, response) {
@@ -445,4 +517,5 @@ module.exports = {
     updateUser,
     uploadImage,
     getImageFile,
+    confirmAccount
 }

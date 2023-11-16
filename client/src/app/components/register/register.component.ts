@@ -98,8 +98,12 @@ export class RegisterComponent implements OnInit {
     this._userService.register(this.user).subscribe(
       response => {
         if (response.user && response.user._id) {
+          // Registro exitoso
           this.status = 'success';
           registerForm.reset();
+
+          // Enviar correo de confirmación
+          this.sendConfirmationEmail(response.user.email);
         }
       },
       error => {
@@ -107,6 +111,28 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+
+  sendConfirmationEmail(email: string) {
+    Notiflix.Loading.standard('Cargando..');
+    let params = {
+      email: email,
+      asunto: 'Confirmación de cuenta',
+      mensaje: 'Gracias por registrarte en nuestra aplicación. Por favor, haz clic en el siguiente enlace para confirmar tu cuenta.'
+    };
+
+    this._userService.sendConfirmationEmail(params).subscribe(
+      resp => {
+        Notiflix.Loading.remove();
+        Notiflix.Notify.success('Correo de confirmación enviado correctamente');
+      },
+      error => {
+        console.error(error);
+        Notiflix.Loading.remove();
+        Notiflix.Notify.failure('Error al enviar el correo de confirmación');
+      }
+    );
+  }
+
 
 
   enviocorreo(){
