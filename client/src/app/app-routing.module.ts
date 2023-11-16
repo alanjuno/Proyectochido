@@ -14,9 +14,14 @@ import { FollowedComponent } from './components/followed/followed.component';
 
 import { UserGuard } from './services/user.guard';
 import { WikiComponent } from './wiki/wiki.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },

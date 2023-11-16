@@ -1,52 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-
 import { IPayPalConfig } from 'ngx-paypal';
 import { ICreateOrderRequest } from "ngx-paypal";
 
-import { NumberService } from '../services/number.service';
-
 @Component({
-  selector: 'app-wiki',
-  templateUrl: './wiki.component.html',
-  styleUrls: ['./wiki.component.css']
+  selector: 'app-pay',
+  templateUrl: './pay.component.html',
+  styleUrls: ['./pay.component.css']
 })
-export class WikiComponent implements OnInit {
+export class PayComponent implements OnInit {
 
-  
   public payPalConfig?: IPayPalConfig;
   public showPaypalButtons: boolean;
   public value: string | number;
-  
-  operacion: string;
-  o1: number;
-  signo: boolean;
-  mirame: string;
-  resultado: number;
-  ss: string;
-  result: string;
 
-  constructor(private numbeer: NumberService) { }
+  constructor() { 
+  }
+
   ngOnInit(): void {
     this.initConfig();
-
-
-
-    this.resultado = 0;
-    this.operacion = '0';
-    this.signo = false;
-    this.mirame = '0';
-    this.ss = '';
-    this.numbeer.getResultado().subscribe(r => {
-      this.resultado = r;
-    });
-
-    this.op(0);
-
-
-    this.result = '';
-    this.numbeer.getResultado().subscribe(x => {
-      this.result = this.result + x + ' \n';
-    });
   }
 
   private initConfig(): void {
@@ -112,19 +83,4 @@ export class WikiComponent implements OnInit {
   back(){
     this.showPaypalButtons = false;
   }
-
-
-
-
-  
-
-  op(datos) {
-    this.numbeer.op(datos).subscribe(s => {
-      this.mirame = s;
-    });
-  }
-  igual() {
-    this.numbeer.getIgual();
-  }
 }
-

@@ -10,7 +10,7 @@ const PORT = 3800;
 // Conexión con la base de datos
 mongoose.set('useFindAndModify', false);
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/wiclopedia', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost:27017/Proyect1', {useNewUrlParser: true, useUnifiedTopology: true})
         .then(() => {
             // Crear servidor
             app.listen(PORT, () => {
