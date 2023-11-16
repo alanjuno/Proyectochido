@@ -27,14 +27,14 @@ import { FollowedComponent } from './components/followed/followed.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 
 
-
-
-
-
 // Servicios
 import { UserService } from './services/user.service';
 import { UserGuard } from './services/user.guard';
 import { WikiComponent } from './wiki/wiki.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -51,6 +51,8 @@ import { WikiComponent } from './wiki/wiki.component';
     FollowingComponent,
     FollowedComponent,
     WikiComponent,
+    TermsAndConditionsComponent,
+    PrivacyPolicyComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { WikiComponent } from './wiki/wiki.component';
     MomentModule,
     MessagesModule,
     ReactiveFormsModule,
-    
+    NgxPayPalModule,
+    RouterModule
     
   ],
   providers: [UserService, UserGuard],

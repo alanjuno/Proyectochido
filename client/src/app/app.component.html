@@ -74,3 +74,16 @@
  </nav>
 
  <router-outlet></router-outlet>
+
+ <div *ngIf="!acceptedTerms">
+  <app-terms-and-conditions (termsAccepted)="onTermsAccepted()"></app-terms-and-conditions>
+</div>
+
+<div *ngIf="acceptedTerms">
+  <!-- El contenido principal de tu página aquí -->
+  <h1>Bienvenido a la página principal</h1>
+  <!-- Otros elementos de tu página aquí -->
+</div>
+
+<a routerLink="/terms-and-conditions">Términos y Condiciones</a>
+<a routerLink="/privacy-policy">Política de Privacidad</a>

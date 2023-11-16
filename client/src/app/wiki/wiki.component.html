@@ -1,5 +1,58 @@
 <p>wiki works!</p>
 
+<button *ngIf="!showPaypalButtons" 
+  (click)="pay()">Pagar con paypal
+</button>
+
+<ngx-paypal *ngIf="showPaypalButtons" 
+  [config]="payPalConfig">
+</ngx-paypal>
 
 
+<button *ngIf="showPaypalButtons" 
+  (click)="back()">Volver atrás
+</button>
+
+
+
+
+
+<div class="calculadora">
+  <div class="pantalla">
+      <div class="operacion">
+          {{mirame}}
+      </div>
+      <div class="resultado">
+          {{resultado}}
+      </div>
+  </div>
+  <div class="numeros">
+      <div (click)="op(9)">9</div>
+      <div (click)="op(8)">8</div>
+      <div (click)="op(7)">7</div>
+      <div (click)="op('/')">/</div>
+      <div (click)="op(6)">6</div>
+      <div (click)="op(5)">5</div>
+      <div (click)="op(4)">4</div>
+      <div (click)="op('x')">x</div>
+      <div (click)="op(3)">3</div>
+      <div (click)="op(2)">2</div>
+      <div (click)="op(1)">1</div>
+      <div (click)="op('+')">+</div>
+      <div (click)="op('.')">.</div>
+      <div (click)="op(0)">0</div>
+      <div (click)="op('c')">Borrar</div>
+      <div (click)="op('-')">-</div>
+      <div>Un</div>
+      <div>Programador</div>
+      <div>.com</div>
+      <div (click)="igual()" style="background-color: red;">=</div>
+
+  </div>
+</div>
+
+<div class="upantalla">
+  <h2>Resultados: </h2>
+  <p>{{result}}</p>
+</div>
   

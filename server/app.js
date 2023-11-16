@@ -11,6 +11,7 @@ const userRoutes = require('./routes/user');
 const followRoutes = require('./routes/follow');
 const publicationRoutes = require('./routes/publication');
 const messageRoutes  = require('./routes/message');
+const resultRoutes = require('./routes/result')
 
 // Middlewares (métodos que se ejecutan antes de llegar al controlador)
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,6 +34,9 @@ app.use('/api', userRoutes);
 app.use('/api', followRoutes);
 app.use('/api', publicationRoutes);
 app.use('/api', messageRoutes);
+app.use('/api', resultRoutes)
 
 // Exportar la configuración
 module.exports = app;
+
+
