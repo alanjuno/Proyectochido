@@ -22,6 +22,12 @@ export class UserService {
         return this._http.post(this.url + 'register', params, {headers});
     }
 
+    // Método para enviar correo de confirmación
+    sendConfirmationEmail(emailParams: any): Observable<any> {
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.post(this.url + 'envio', emailParams, { headers });
+    }
+
     // Método de login
     signup(user, gettoken = null): Observable<any> {
         if (gettoken !== null) {
