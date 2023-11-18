@@ -14,7 +14,7 @@ Ejecuta los comandos definidos en la sección de scripts del archivo **package.j
 
 ## Frontend Angular
 
-Este proyecto se ha generado con [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
+Este proyecto se ha generado con [Angular CLI](https://github.com/angular/angular-cli) version 10.2.5.
 
 ## Servidor de desarrollo
 
